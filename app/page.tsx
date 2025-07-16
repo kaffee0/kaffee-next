@@ -8,23 +8,6 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen bg-white text-black overflow-hidden font-sans">
-      <header className="absolute top-6 left-1/2 transform -translate-x-1/2 flex gap-4 z-50">
-        <Link href="/">
-          <button className="px-4 py-2 bg-white text-black border border-black rounded-full shadow hover:bg-gray-100 text-sm font-semibold">home</button>
-        </Link>
-        <Link href="/apps">
-          <button className="px-4 py-2 bg-white text-black border border-black rounded-full shadow hover:bg-gray-100 text-sm font-semibold">apps</button>
-        </Link>
-        <Link href="/designs">
-          <button className="px-4 py-2 bg-white text-black border border-black rounded-full shadow hover:bg-gray-100 text-sm font-semibold">designs</button>
-        </Link>
-        <Link href="/photos">
-          <button className="px-4 py-2 bg-white text-black border border-black rounded-full shadow hover:bg-gray-100 text-sm font-semibold">photos</button>
-        </Link>
-        <Link href="/profile">
-          <button className="px-4 py-2 bg-white text-black border border-black rounded-full shadow hover:bg-gray-100 text-sm font-semibold">profile</button>
-        </Link>
-      </header>
       {/* 背景のモーションボール */}
       <motion.div
         className="absolute top-0 left-0 w-full h-full -z-10"
