@@ -31,62 +31,80 @@ const apps = [
 ];
 
 export default function AppsPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-[#eac4ca] text-black pt-28 px-4 text-center">
       <h1 className="text-3xl font-bold mb-2">coded with caffeine</h1>
       <p className="text-sm text-gray-700">魔法みたいな小部屋にようこそ。</p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12 max-w-6xl mx-auto">
-        {apps.map((app) => {
-          const [expanded, setExpanded] = React.useState(false);
-          return (
-            <div
-              key={app.name}
-              className={`cursor-pointer backdrop-blur-xl bg-white/30 border border-white/50 rounded-2xl p-6 shadow-md text-left transition-all duration-500 ease-in-out hover:shadow-xl ${
-                expanded ? "max-h-[600px]" : "max-h-[300px] overflow-hidden"
-              } flex flex-col items-center`}
-              onClick={() => setExpanded(!expanded)}
+        {apps.map((app, i) => (
+          <div
+            key={app.name}
+            className="cursor-pointer flex flex-col items-center min-w-[200px]"
+            onClick={() => setOpenIndex(i)}
+          >
+            <Image
+              src={app.image}
+              alt={app.name}
+              width={200}
+              height={200}
+              className="rounded-xl mb-2 w-full h-[220px] object-contain animate-[float_4s_ease-in-out_infinite]"
+            />
+            <h2 className="text-lg font-semibold text-center mt-2">{app.name}</h2>
+            <p className="text-sm text-gray-700 italic text-center mt-1">
+              {app.description.slice(0, 15)}...
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {openIndex !== null && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+          onClick={() => setOpenIndex(null)}
+        >
+          <div
+            className="bg-white rounded-xl p-6 w-[90vw] max-w-[1024px] h-[80vh] mx-4 relative flex flex-col md:flex-row gap-6 transition-all duration-500 ease-in-out scale-100 opacity-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl"
+              onClick={() => setOpenIndex(null)}
             >
+              ×
+            </button>
+
+            {/* Left: Icon & Meta */}
+            <div className="flex flex-col items-center md:items-start md:w-1/2">
               <Image
-                src={app.image}
-                alt={app.name}
-                width={80}
-                height={80}
+                src={apps[openIndex].image}
+                alt={apps[openIndex].name}
+                width={240}
+                height={240}
                 className="rounded-xl mb-4"
               />
-              <h2 className="text-lg font-semibold text-center">{app.name}</h2>
-              <p className="text-sm text-gray-700 italic text-center">
-                {app.description.slice(0, 15)}...
-              </p>
-
-              {expanded && (
-                <div className="mt-4">
-                  <p className="text-sm text-gray-800 mb-2">{app.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {app.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs bg-black text-white px-2 py-0.5 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <pre className="text-xs bg-gray-100 text-gray-700 p-2 rounded font-mono whitespace-pre-wrap mb-3">
-                    {app.miniCode}
-                  </pre>
-                  <a
-                    href={app.testflight}
-                    target="_blank"
-                    className="inline-block text-xs px-3 py-1 bg-black text-white rounded-full hover:bg-gray-800 transition"
-                  >
-                    Test on TestFlight
-                  </a>
-                </div>
-              )}
+              <h2 className="text-2xl font-bold mb-1">{apps[openIndex].name}</h2>
+              <p className="text-sm text-gray-500 mb-2">公開日：2025年7月（仮）</p>
+              <a
+                href={apps[openIndex].testflight}
+                target="_blank"
+                className="inline-block text-sm px-4 py-1 bg-black text-white rounded-full hover:bg-gray-800 transition"
+              >
+                Test on TestFlight
+              </a>
             </div>
-          );
-        })}
-      </div>
+
+            {/* Right: Description */}
+            <div className="md:w-1/2">
+              <p className="text-sm text-gray-800 mb-4">{apps[openIndex].description}</p>
+              <pre className="text-xs bg-gray-100 text-gray-700 p-3 rounded font-mono whitespace-pre-wrap text-left">
+                {apps[openIndex].miniCode}
+              </pre>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
