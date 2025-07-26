@@ -17,7 +17,7 @@ const apps = [
     description: "詩的な日記を書ける美しいUIのメモアプリ。",
     tags: ["poetic", "markdown", "aesthetic"],
     image: "/icons/icon2.png",
-    testflight: "https://testflight.apple.com/join/example",
+    testflight: "https://testflight.apple.com/join/CF3UsRGu",
     miniCode: `write("今日も綺麗だったね", with: .grace)`,
   },
   {
