@@ -5,11 +5,16 @@
   --foreground: #171717;
 }
 
-@theme inline {
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --accent: #f6c3b3;
+--accent-dark: #e2879d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,4 +29,5 @@ body {
   color: var(--foreground);
   transition: background-color 0.3s ease;
   font-family: var(--font-sans, Arial, sans-serif);
+  min-height: 100vh;
 }
